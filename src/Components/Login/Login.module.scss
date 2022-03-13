@@ -35,10 +35,6 @@
 
 }
 
-.blokError:invalid {
-    border: solid 1px red;
-    color: red
-}
 
 .label {
     text-align: left;
@@ -99,6 +95,11 @@
 .blokError {
     position: absolute;
     color: red;
+
+    &:invalid {
+        border: solid 1px red;
+        color: red
+    }
 }
 
 
