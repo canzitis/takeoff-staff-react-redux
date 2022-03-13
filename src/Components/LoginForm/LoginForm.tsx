@@ -5,7 +5,7 @@ import {
     initializeProfile,
     initializetSuccess,
 } from "../redux/app-reducer";
-import s from "./LoginForm.module.css";
+import s from "./LoginForm.module.scss";
 
 const LoginForm = () => {
     const disabledButtonLogin = useSelector((state:any) => state.disabledButtonLogin);

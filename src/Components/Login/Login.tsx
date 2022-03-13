@@ -1,4 +1,4 @@
-import s from "./Login.module.css";
+import s from "./Login.module.scss";
 import Preloader from "../Preloader/Preloader";
 import {useDispatch, useSelector} from "react-redux";
 import LoginForm from "../LoginForm/LoginForm";
@@ -17,12 +17,12 @@ const Login = () => {
     })
 
     return (
-        <div className={s.loginBlock}>
-            <div className={s.header}>
+        <div className={s.loginBlockWrapper}>
+            <div className={s.loginBlock__header}>
                {/* {!initialize && <Preloader/>}*/}
                 <h4>Login</h4>
             </div>
-            <div className="content">
+            <div>
                 {loginErrorText && <ErrorLogin/>}
                 <LoginForm/>
             </div>

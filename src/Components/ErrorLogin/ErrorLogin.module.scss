@@ -1,4 +1,4 @@
-.errorLoginBlock{
+.errorLoginWrapper{
     display: flex;
     align-items: center;
     padding-left: 10px;
@@ -9,18 +9,14 @@
     box-sizing: border-box;
     border-radius: 8px;
 
-    font-family: Helvetica Neue;
-    font-style: normal;
-    font-weight: normal;
     font-size: 14px;
     line-height: 17px;
 
     color: #000000;
     margin-bottom: 40px;
-
 }
 
-.imgError{
+.errorLogin__img{
     width: 20px;
     height: 20px;
     text-align: center;
@@ -28,9 +24,6 @@
     border-radius: 50%;
     background: #FFC8C8;
 
-    font-family: Helvetica Neue;
-    font-style: normal;
-    font-weight: normal;
     font-size: 20px;
     line-height: 17px;
 
@@ -41,11 +34,11 @@
 
 
 @media(max-width:420px){
-    .imgError{
+    .errorLogin__img{
         margin: 5px 0 5px 0;
-
     }
-    .errorLoginBlock {
+
+    .errorLoginWrapper {
         flex-direction: column;
         height: 100%;
     }

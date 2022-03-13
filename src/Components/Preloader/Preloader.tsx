@@ -1,5 +1,5 @@
 import preloaderGif from "/images/preloader/preloader.gif";
-import s from "./Preloader.module.css";
+import s from "./Preloader.module.scss";
 
 const Preloader = () => {
     return (
