@@ -11,16 +11,13 @@
     input {
         width: 100%;
         height: 60px;
-
         padding: 0;
-
         background-color: #F5F5F5;
         border-radius: 8px;
         outline: none;
         border: none;
         padding-left: 10px;
         box-sizing: border-box;
-
         color: #232323;
 
         &:invalid {
@@ -58,10 +55,8 @@
 .buttonSend {
     width: 100%;
     height: 60px;
-
     background: #4A67FF;
     border-radius: 8px;
-
     font-weight: bold;
     font-size: 18px;
     line-height: 22px;
