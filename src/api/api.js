@@ -1,6 +1,5 @@
 export const api = {
     getProfile() {
-        debugger;
         return new Promise(function (resolve) {
             return setTimeout(() => {
                 const profile = {

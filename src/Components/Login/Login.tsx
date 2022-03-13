@@ -8,8 +8,8 @@ import {initializeProfile} from "../redux/app-reducer";
 
 const Login = () => {
     const dispatch = useDispatch();
-    const initialize = useSelector((state:any) => state.initialize);
-    const loginErrorText = useSelector((state:any) => state.loginErrorText);
+    const initialize = useSelector((state: any) => state.initialize);
+    const loginErrorText = useSelector((state: any) => state.loginErrorText);
 
 
     useEffect(() => {
@@ -19,7 +19,7 @@ const Login = () => {
     return (
         <div className={s.loginBlockWrapper}>
             <div className={s.loginBlock__header}>
-               {/* {!initialize && <Preloader/>}*/}
+                {initialize && <Preloader/>}
                 <h4>Login</h4>
             </div>
             <div>

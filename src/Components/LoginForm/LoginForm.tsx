@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import {
     initializeProfile,
-    initializetSuccess,
+    initializetSuccess, setUserForm, userFormType,
 } from "../redux/app-reducer";
 import s from "./LoginForm.module.scss";
 
@@ -17,8 +17,9 @@ const LoginForm = () => {
         formState: { errors },
     } = useForm();
 
-    const onSubmit = (data:any) => {
-
+    const onSubmit:any = (data:userFormType) => {
+        dispatch(initializetSuccess(false));
+        dispatch(setUserForm(data));
         dispatch(initializeProfile());
     };
 
