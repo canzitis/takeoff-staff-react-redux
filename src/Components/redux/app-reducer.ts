@@ -2,8 +2,9 @@ import {api} from "../../api/api";
 
 const SET_INITIALIZET = "SET_INITIALIZET"
 const SET_DISABLE_BUTTON_LOGIN = "SET_DISABLE_BUTTON_LOGIN"
-const SET_PROFILE = "SET_PROFILE"
 const SET_USER_FORM = "SET_USER_FORM"
+const USER_VERIFICATION = "USER_VERIFICATION"
+const EXIT_ACCOUNT = "EXIT_ACCOUNT"
 
 
 export type userFormType = {
@@ -12,23 +13,17 @@ export type userFormType = {
 }
 
 
-type userDataType = {
-    email: string
-    password: string
-}
-
-type initialStateType = {
-    userData: userDataType | null,
+export type initialStateType = {
     userForm: userFormType,
     initialize: boolean,
     accessible: boolean,
     disabledButtonLogin: boolean,
-    loginErrorText: boolean | null
+    loginErrorText: boolean | null,
+    verification: boolean
 }
 
 
 let initialState = {
-    userData: null,
     userForm: {
         email: null,
         password: null,
@@ -36,7 +31,8 @@ let initialState = {
     initialize: false,
     accessible: false,
     disabledButtonLogin: false,
-    loginErrorText: null
+    loginErrorText: null,
+    verification: false,
 }
 
 
@@ -45,22 +41,18 @@ const appReducer = (state = initialState, action: any): initialStateType => {
         case SET_INITIALIZET:
             return {
                 ...state,
-                initialize: action.initialize
+                initialize: action.initialize,
+                accessible: true
             }
         case SET_DISABLE_BUTTON_LOGIN:
             return {
                 ...state,
                 disabledButtonLogin: action.disabled
             }
-        case SET_PROFILE:
+        case EXIT_ACCOUNT:
             return {
                 ...state,
-                userData: {
-                    email: action.userData.email,
-                    password: action.userData.password,
-                },
-                initialize: true,
-                disabledButtonLogin: false
+                accessible: false
             }
         default:
             return state;
@@ -93,21 +85,6 @@ export const initializetSuccess = (initialize: boolean): initializetSuccessType 
     }
 }
 
-
-type setProfileType = {
-    type: typeof SET_PROFILE,
-    profile: userDataType
-}
-
-export const setProfile = (profile: userDataType): setProfileType => {
-    return {
-        type: SET_PROFILE,
-        profile
-    }
-}
-
-
-
 type setUserFormType = {
     type: typeof SET_USER_FORM,
     userForm: userFormType
@@ -120,14 +97,37 @@ export const setUserForm = (userForm: userFormType): setUserFormType => {
     }
 }
 
+
+type userVerificationType = {
+    type: typeof USER_VERIFICATION,
+    verification: boolean
+}
+export const userVerification = (verification: boolean): userVerificationType => {
+    return {
+        type: USER_VERIFICATION,
+        verification
+    }
+}
+
+type exitAccountType = {
+    type: typeof EXIT_ACCOUNT,
+}
+
+export const exitAccount = (): exitAccountType => {
+    return {
+        type: EXIT_ACCOUNT,
+    }
+}
+
 export const initializeProfile = () => {
     return async (dispatch: any) => {
+        dispatch(initializetSuccess(false));
         dispatch(setDisabledButtonLogin(true))
-        dispatch(initializetSuccess(false))
         const profile = await api.getProfile()
         if (profile.status === 200) {
-            dispatch(setProfile(profile.userData))
             dispatch(initializetSuccess(true))
+            dispatch(setDisabledButtonLogin(false))
+            dispatch(userVerification(true))
         }
     }
 }

@@ -1,0 +1,62 @@
+
+.header h4{
+    font-family: Helvetica Neue;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 64px;
+    line-height: 78px;
+
+    color: #000000;
+}
+
+.content span{
+    font-family: Helvetica Neue;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 48px;
+
+    color: #000000;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+
+.exitProfileButton:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: transform .5s
+}
+
+
+.dataUser h4{
+    margin:  0;
+    font-weight: bold;
+}
+
+.exitAccountButton button{
+    width: 200px;
+    height: 60px;
+    border: none;
+
+    background: #F5F5F5;
+    border-radius: 8px;
+
+
+    font-family: Helvetica Neue;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+
+    color: #000000;
+}
+
+
+@media(max-width:420px){
+    .content span{
+        display: block;
+    }
+}

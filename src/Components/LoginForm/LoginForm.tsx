@@ -1,24 +1,23 @@
 import React from "react";
-import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import {useForm} from "react-hook-form";
+import {useDispatch, useSelector} from "react-redux";
 import {
     initializeProfile,
-    initializetSuccess, setUserForm, userFormType,
+    setUserForm, userFormType
 } from "../redux/app-reducer";
 import s from "./LoginForm.module.scss";
 
 const LoginForm = () => {
-    const disabledButtonLogin = useSelector((state:any) => state.disabledButtonLogin);
+    const disabledButtonLogin = useSelector((state: any) => state.disabledButtonLogin);
 
     const dispatch = useDispatch();
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: {errors},
     } = useForm();
 
-    const onSubmit:any = (data:userFormType) => {
-        dispatch(initializetSuccess(false));
+    const onSubmit: any = (data: userFormType) => {
         dispatch(setUserForm(data));
         dispatch(initializeProfile());
     };
@@ -28,18 +27,18 @@ const LoginForm = () => {
             <div className={s.inputForma}>
                 <h4>Логин</h4>
                 <input
-                    style={{ border: errors.email && "solid 1px #E26F6F" }}
+                    style={{border: errors.email && "solid 1px #E26F6F"}}
                     type="email"
-                    {...register("email", { required: true })}
+                    {...register("email", {required: true})}
                 />
                 {errors.email && <span className={s.errorText}>Обязательное поле</span>}
             </div>
             <div className={s.inputForma}>
                 <h4>Пароль</h4>
                 <input
-                    style={{ border: errors.password && "solid 1px #E26F6F" }}
+                    style={{border: errors.password && "solid 1px #E26F6F"}}
                     type="password"
-                    {...register("password", { required: true })}
+                    {...register("password", {required: true})}
                 />
                 {errors.password && <span>Обязательное поле</span>}
             </div>
