@@ -1,20 +1,14 @@
+import axios from "axios";
+
 export const api = {
-    getProfile() {
-        return new Promise(function (resolve) {
-            return setTimeout(() => {
-                const profile = {
-                    status: 200,
-                    userData: {
-                        email: "steve.jobs@example.com",
-                        password: "password"
-                    }
-                }
-                resolve(profile)
-            }, 3000)
-        }).then(profile => {
-            return profile
-        })
+    getUsers() {
+        return axios.get(`http://localhost:3001/users`)
+            .then(response => {
+                return response
+            })
+            .catch(error => {
+                return error
+            })
 
     }
-
 }

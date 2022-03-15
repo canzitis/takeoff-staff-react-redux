@@ -1,23 +1,26 @@
 import {useDispatch, useSelector} from "react-redux";
-import s from "./Profile.module.css";
-import {exitAccount, initialStateType} from "../redux/app-reducer";
-import {Redirect} from "react-router"
+import s from "./Users.module.scss";
+import {exitAccount, initialStateType} from "../../redux/app-reducer";
+import {Navigate} from "react-router-dom";
+
 
 const Users = () => {
     const email = useSelector((state: initialStateType) => state.userForm.email);
-    const accessible = useSelector((state: initialStateType) => state.accessible);
+    const verification = useSelector((state: initialStateType) => state.verification);
     const dispatch = useDispatch();
+
     const clikButtonExit = () => {
         dispatch(exitAccount());
     };
 
-    if (!accessible) {
-        return <Redirect to="/login"/>
+    if (!verification) {
+        return <Navigate to="/login"/>
     }
+
     return (
         <div>
             <div className={s.header}>
-                <h4>ONLI.</h4>
+                <h4>Users</h4>
             </div>
             <div className={s.content}>
                 <div className={s.dataUser}>

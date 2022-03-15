@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {
     initializeProfile,
     setUserForm, userFormType
-} from "../redux/app-reducer";
+} from "../../redux/app-reducer";
 import s from "./LoginForm.module.scss";
 
 const LoginForm = () => {
