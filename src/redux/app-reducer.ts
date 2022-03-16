@@ -12,7 +12,7 @@ export type userFormType = {
     email: string | null
     password: string | null
 }
-type usersDataType = {
+export type usersDataType = {
     id: number,
     name: string,
     age: number,
@@ -20,11 +20,11 @@ type usersDataType = {
     work: boolean
 }
 export type initialStateType = {
-    userForm: userFormType,
+    userForm: any,
     initialize: boolean,
     disabledButtonLogin: boolean,
     verification: boolean
-    usersData: usersDataType | null
+    usersData: any
 }
 
 
@@ -36,7 +36,7 @@ let initialState = {
     initialize: false,
     disabledButtonLogin: false,
     verification: false,
-    usersData: null,
+    usersData: [],
 }
 
 
@@ -62,16 +62,19 @@ const appReducer = (state = initialState, action: any): initialStateType => {
                 ...state,
                 verification: action.verification
             }
+        case SET_USER_FORM:
+            return {
+                ...state,
+                userForm: {
+                    email: action.userForm.email,
+                    password: action.userForm.password
+                }
+            }
         case SET_USERS:
             return {
                 ...state,
-                usersData: {
-                    id: action.id,
-                    name: action.name,
-                    age: action.age,
-                    urlImg: action.urlImg,
-                    work: action.work
-                }
+                usersData: [...action.users],
+                verification: true
             }
         default:
             return state;
@@ -108,6 +111,7 @@ type setUserFormType = {
     userForm: userFormType
 }
 export const setUserForm = (userForm: userFormType): setUserFormType => {
+    debugger;
     return {
         type: SET_USER_FORM,
         userForm
@@ -141,6 +145,7 @@ type setUsersType = {
     users: usersDataType
 }
 const setUsers = (users: usersDataType): setUsersType => {
+    debugger;
     return {
         type: SET_USERS,
         users
@@ -157,7 +162,7 @@ export const initializeProfile = () => {
             dispatch(setUsers(data.data))
             dispatch(initializetSuccess(true))
             dispatch(setDisabledButtonLogin(false))
-            dispatch(userVerification(true))
+            console.log(initialState.verification)
         }
     }
 }

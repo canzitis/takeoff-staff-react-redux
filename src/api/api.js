@@ -9,6 +9,5 @@ export const api = {
             .catch(error => {
                 return error
             })
-
     }
 }
