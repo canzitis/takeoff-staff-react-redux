@@ -4,14 +4,14 @@
             "id": 0,
             "name": "Иван Грозный",
             "age": 35,
-            "urlImg": "/public/image/user.png",
+            "urlImg": "/image/user.png",
             "work": true
         },
         {
             "id": 1,
             "name": "Алексей Петров",
             "age": 19,
-            "urlImg": "/public/image/user.png",
+            "urlImg": "/image/user.png",
             "work": false
         },
         {
@@ -25,7 +25,7 @@
             "id": 3,
             "name": "Саша Пупкин",
             "age": 21,
-            "urlImg": "/public/image/user.png",
+            "urlImg": "/image/user.png",
             "work": true
         },
         {
@@ -39,7 +39,7 @@
             "id": 5,
             "name": "Владимир Терешков",
             "age": 31,
-            "urlImg": "/public/image/user.png",
+            "urlImg": "/image/user.png",
             "work": false
         }
     ]

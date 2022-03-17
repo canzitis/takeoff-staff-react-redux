@@ -29,13 +29,24 @@ const Users = () => {
                     <h4>Здравствуйте, <span>{email}</span></h4>
                 </div>
 
+                <div className={s.search}>
+                    <input type="text"/>
+                    <button>Поиск</button>
+                </div>
+
                 <div className={s.usersWrapper}>
                     {usersData.map((item: usersDataType) => {
                         return <div className={s.usersItem}>
                             <img src={item.urlImg} alt=""/>
-                            <h4>{item.name ? item.name : "нет аватарки"}</h4>
-                            <div>Мой возраст: <span>{item.age}</span></div>
-                            <div>В поиске работы: {item.work ? "Да" : "Нет"}</div>
+                            <h4>{item.name && item.name}</h4>
+                            <div className={s.usersItem__age}>Мой возраст: <span>{item.age}</span></div>
+                            <div className={s.usersItem__work}>В поиске работы: <span>{item.work ? "Да" : "Нет"}</span>
+                            </div>
+                            <div className={s.buttonWrapper}>
+                                <button>Редактировать</button>
+                                <button>Удалить</button>
+                            </div>
+
                         </div>
                     })}
                 </div>
