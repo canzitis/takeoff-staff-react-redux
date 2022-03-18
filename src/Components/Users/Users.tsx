@@ -3,6 +3,8 @@ import s from "./Users.module.scss";
 import {exitAccount, initialStateType, usersDataType} from "../../redux/app-reducer";
 import React from "react";
 import {Navigate} from "react-router-dom";
+import baseImg from '../../img/defaultImg/no_name_ava.png'
+import Search from "../SearchUsers/SearchUsers";
 
 
 const Users = () => {
@@ -30,14 +32,13 @@ const Users = () => {
                 </div>
 
                 <div className={s.search}>
-                    <input type="text"/>
-                    <button>Поиск</button>
+                    <Search/>
                 </div>
 
                 <div className={s.usersWrapper}>
                     {usersData.map((item: usersDataType) => {
                         return <div className={s.usersItem}>
-                            <img src={item.urlImg} alt=""/>
+                            <img src={item.urlImg ? item.urlImg : baseImg} alt=""/>
                             <h4>{item.name && item.name}</h4>
                             <div className={s.usersItem__age}>Мой возраст: <span>{item.age}</span></div>
                             <div className={s.usersItem__work}>В поиске работы: <span>{item.work ? "Да" : "Нет"}</span>
