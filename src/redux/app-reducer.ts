@@ -157,12 +157,29 @@ export const initializeProfile = () => {
     return async (dispatch: any) => {
         dispatch(initializetSuccess(false));
         dispatch(setDisabledButtonLogin(true))
-        const data = await api.getUsers()
-        if (data.status === 200) {
+        const data = await api.getUsers('')
+        if (data?.status === 200) {
             dispatch(setUsers(data.data))
             dispatch(initializetSuccess(true))
             dispatch(setDisabledButtonLogin(false))
-            console.log(initialState.verification)
+        }
+    }
+}
+
+
+type nameSearchType ={
+    search:string
+}
+
+
+export const searchUser = (name:nameSearchType) => {
+    debugger;
+    return async (dispatch: any) => {
+        dispatch(setDisabledButtonLogin(true))
+        const data = await  api.getUsers(name.search)
+        if(data?.status === 200){
+            dispatch(setUsers(data.data))
+            dispatch(setDisabledButtonLogin(false))
         }
     }
 }

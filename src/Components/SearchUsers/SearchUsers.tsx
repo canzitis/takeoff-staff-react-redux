@@ -3,12 +3,7 @@ import {useForm} from "react-hook-form";
 import {useDispatch, useSelector} from "react-redux";
 import s from "./SearchUsers.module.scss";
 import dangerSrc from '../../img/danger.png'
-import any = jasmine.any;
-
-type minLengthType = {
-    value: number,
-    message: string
-}
+import {searchUser} from "../../redux/app-reducer";
 
 const Search = () => {
     const dispatch = useDispatch();
@@ -20,6 +15,7 @@ const Search = () => {
     } = useForm();
 
     const onSubmit = (searchData: any) => {
+        dispatch(searchUser(searchData))
         /*dispatch(initializedSuccess(null));
         dispatch(setDataUserForm(data));
         dispatch(initializeProfile());*/
