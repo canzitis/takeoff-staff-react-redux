@@ -6,6 +6,7 @@ import dangerSrc from '../../img/danger.png'
 import {searchUser} from "../../redux/app-reducer";
 
 const Search = () => {
+    const disabledButton = useSelector((state: any) => state.disabledButton);
     const dispatch = useDispatch();
 
     const {
@@ -14,19 +15,22 @@ const Search = () => {
         formState: {errors},
     } = useForm();
 
-    const onSubmit = (searchData: any) => {
-        dispatch(searchUser(searchData))
-        /*dispatch(initializedSuccess(null));
-        dispatch(setDataUserForm(data));
-        dispatch(initializeProfile());*/
+    const onSubmit = (name: any) => {
+        dispatch(searchUser(name.search))
     };
+
+    const resetSearch = () => {
+        dispatch(searchUser(''))
+    }
+
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className={s.searchWrapper}>
                 <div className={s.inputSearch}>
                     <input
-                        style={{border: errors.input && "solid 1px #E26F6F"}}
+                        placeholder="Введите имя или фамилию для поиска"
+                        style={{border: errors.search && "solid 1px #E26F6F"}}
                         {...register("search",
                             {
                                 required: true,
@@ -40,7 +44,14 @@ const Search = () => {
                 <input
                     className={s.buttonSend}
                     type="submit"
-                    /*disabled={disabledButtonLogin}*/
+                    disabled={disabledButton}
+                    value=""
+                />
+                <input
+                    className={s.buttonSearchReset}
+                    type="reset"
+                    value=""
+                    onClick={()=>{resetSearch()}}
                 />
             </div>
             {errors?.search &&

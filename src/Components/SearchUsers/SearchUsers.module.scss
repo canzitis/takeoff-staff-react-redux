@@ -1,16 +1,20 @@
 
 .searchWrapper {
+    position: relative;
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 
 .inputSearch {
-
     input {
         width: 400px;
-        height: 20px;
+        height: 25px;
         border-radius: 5px;
         padding-left: 10px;
+        border: unset;
+        background: #e2e2e2;
+        outline: unset;
     }
 }
 
@@ -66,9 +70,6 @@
 
 
 .inputForma span {
-    font-family: Helvetica Neue;
-    font-style: normal;
-    font-weight: normal;
     font-size: 14px;
     line-height: 17px;
 
@@ -77,15 +78,13 @@
 
 
 .buttonSend {
-    width: 30px;
-    height: 30px;
-
-    background: #4A67FF;
+    position: absolute;
+    right: 60px;
+    width: 24px;
+    height: 24px;
     border-radius: 8px;
-    font-weight: bold;
-    font-size: 10px;
-    color: #FFFFFF;
     border: none;
+    background: url("../../img/search.svg") no-repeat;
 
     &:hover {
         cursor: pointer;
@@ -98,4 +97,19 @@
     }
 }
 
+.buttonSearchReset{
+    width: 24px;
+    height: 24px;
+    margin-left: 5px;
+    border-radius: 8px;
+    border: none;
+    object-fit: cover;
+    background: url("../../img/close-search.svg") no-repeat;
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+        transition: transform .5s;
+    }
+}
 

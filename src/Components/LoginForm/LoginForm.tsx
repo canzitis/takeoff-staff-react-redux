@@ -8,7 +8,7 @@ import {
 import s from "./LoginForm.module.scss";
 
 const LoginForm = () => {
-    const disabledButtonLogin = useSelector((state: any) => state.disabledButtonLogin);
+    const disabledButton = useSelector((state: any) => state.disabledButton);
 
     const dispatch = useDispatch();
     const {
@@ -49,7 +49,7 @@ const LoginForm = () => {
             <input
                 className={s.buttonSend}
                 type="submit"
-                disabled={disabledButtonLogin}
+                disabled={disabledButton}
             />
         </form>
     );

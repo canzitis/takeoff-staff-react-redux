@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import s from "./Users.module.scss";
-import {exitAccount, initialStateType, usersDataType} from "../../redux/app-reducer";
+import {deleteUser, exitAccount, initialStateType, usersDataType} from "../../redux/app-reducer";
 import React from "react";
 import {Navigate} from "react-router-dom";
 import baseImg from '../../img/defaultImg/no_name_ava.png'
@@ -13,9 +13,14 @@ const Users = () => {
     const usersData = useSelector((state: initialStateType) => state.usersData);
     const dispatch = useDispatch();
 
-    const clikButtonExit = () => {
+    const clickButtonExit = () => {
         dispatch(exitAccount());
     };
+
+    const clickDeleteUser =(id:number)=>{
+        debugger;
+        dispatch(deleteUser(id))
+    }
 
     if (!verification) {
         return <Navigate to='/login' replace={true}/>
@@ -37,7 +42,7 @@ const Users = () => {
 
                 <div className={s.usersWrapper}>
                     {usersData.map((item: usersDataType) => {
-                        return <div className={s.usersItem}>
+                        return <div key={item.id} className={s.usersItem}>
                             <img src={item.urlImg ? item.urlImg : baseImg} alt=""/>
                             <h4>{item.name && item.name}</h4>
                             <div className={s.usersItem__age}>Мой возраст: <span>{item.age}</span></div>
@@ -45,7 +50,7 @@ const Users = () => {
                             </div>
                             <div className={s.buttonWrapper}>
                                 <button>Редактировать</button>
-                                <button>Удалить</button>
+                                <button onClick={()=>{clickDeleteUser(item.id)}}>Удалить</button>
                             </div>
 
                         </div>
@@ -56,7 +61,7 @@ const Users = () => {
                     <button
                         className={s.exitProfileButton}
                         onClick={() => {
-                            clikButtonExit();
+                            clickButtonExit();
                         }}
                     >
                         Выйти

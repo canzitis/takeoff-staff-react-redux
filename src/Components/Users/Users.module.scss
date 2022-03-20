@@ -100,9 +100,13 @@
         &:last-child{
             background: rgba(255, 0, 0, 0.49);
         }
+
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.05);
+            transition: transform .5s;
+        }
     }
-
-
 }
 
 

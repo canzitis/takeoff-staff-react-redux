@@ -22,7 +22,7 @@ export type usersDataType = {
 export type initialStateType = {
     userForm: any,
     initialize: boolean,
-    disabledButtonLogin: boolean,
+    disabledButton: boolean,
     verification: boolean
     usersData: any
 }
@@ -34,7 +34,7 @@ let initialState = {
         password: null,
     },
     initialize: false,
-    disabledButtonLogin: false,
+    disabledButton: false,
     verification: false,
     usersData: [],
 }
@@ -50,7 +50,7 @@ const appReducer = (state = initialState, action: any): initialStateType => {
         case SET_DISABLE_BUTTON_LOGIN:
             return {
                 ...state,
-                disabledButtonLogin: action.disabled
+                disabledButton: action.disabled
             }
         case EXIT_ACCOUNT:
             return {
@@ -111,25 +111,11 @@ type setUserFormType = {
     userForm: userFormType
 }
 export const setUserForm = (userForm: userFormType): setUserFormType => {
-    debugger;
     return {
         type: SET_USER_FORM,
         userForm
     }
 }
-
-
-type userVerificationType = {
-    type: typeof USER_VERIFICATION,
-    verification: boolean
-}
-export const userVerification = (verification: boolean): userVerificationType => {
-    return {
-        type: USER_VERIFICATION,
-        verification
-    }
-}
-
 
 type exitAccountType = {
     type: typeof EXIT_ACCOUNT,
@@ -145,7 +131,6 @@ type setUsersType = {
     users: usersDataType
 }
 const setUsers = (users: usersDataType): setUsersType => {
-    debugger;
     return {
         type: SET_USERS,
         users
@@ -166,20 +151,29 @@ export const initializeProfile = () => {
     }
 }
 
-
-type nameSearchType ={
-    search:string
-}
-
-
-export const searchUser = (name:nameSearchType) => {
-    debugger;
+export const searchUser = (name: string) => {
     return async (dispatch: any) => {
         dispatch(setDisabledButtonLogin(true))
-        const data = await  api.getUsers(name.search)
-        if(data?.status === 200){
+        const data = await api.getUsers(name)
+        if (data?.status === 200) {
             dispatch(setUsers(data.data))
             dispatch(setDisabledButtonLogin(false))
         }
     }
 }
+
+
+export const deleteUser = (id: number) => {
+    return async (dispatch: any) => {
+        debugger
+        const data = await api.deleteUser(id)
+        if (data?.status === 200) {
+            const data = await api.getUsers('')
+            if (data?.status === 200) {
+                dispatch(setUsers(data.data))
+            }
+        }
+    }
+}
+
+

@@ -13,5 +13,15 @@ export const api = {
             .catch(error => {
                 return console.log(error);
             })
+    },
+
+    deleteUser(id: number) {
+        return axios.delete(`${instanceAPI.baseUrl}/${id}`)
+            .then(response => {
+                return response
+            })
+            .catch(error => {
+                return console.log(error);
+            })
     }
 }
