@@ -57,7 +57,7 @@ const Users = () => {
                     {usersData.map((item: usersDataType) => {
                         return <div key={item.id} className={s.usersItem}>
                             <img src={item.urlImg ? item.urlImg : baseImg} alt=""/>
-                            <h4>{item.name && item.name}</h4>
+                            <h4>{item.name}</h4>
                             <div className={s.usersItem__age}>Мой возраст: <span>{item.age}</span></div>
                             <div className={s.usersItem__work}>В поиске работы: <span>{item.work ? "Да" : "Нет"}</span>
                             </div>

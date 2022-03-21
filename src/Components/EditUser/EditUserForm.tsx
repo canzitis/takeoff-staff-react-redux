@@ -1,6 +1,6 @@
 import {useSelector} from "react-redux";
 import {addedUser, initialStateType, usersDataType} from "../../redux/app-reducer";
-import React, {MutableRefObject, useEffect, useRef} from "react";
+import React, {MutableRefObject, useEffect, useRef, useState} from "react";
 import s from "./EditUserForm.module.scss";
 import {useForm} from "react-hook-form";
 
@@ -13,6 +13,7 @@ type setEditUserFormType = {
 const EditUserForm: React.FC<setEditUserFormType> = ({setEditUserForm, editUserForm, idUserEdit}) => {
     const usersData = useSelector((state: initialStateType) => state.usersData);
     const editUserFormRef = useRef() as MutableRefObject<HTMLDivElement>;
+    const [editUser, setEditUser] = useState(null);
 
 
     useEffect(() => {
@@ -30,43 +31,37 @@ const EditUserForm: React.FC<setEditUserFormType> = ({setEditUserForm, editUserF
     const {
         register,
         handleSubmit,
+        setValue,
         reset,
         formState: {errors},
     } = useForm();
 
     const onSubmit: any = (data: usersDataType) => {
-
+        console.log(data)
 
         setEditUserForm(false)
     };
 
 
-    const test = () => {
-        setEditUserForm(false)
-        reset({
-            id: null,
-            name: '',
-            age: null,
-            urlImg: null,
-            work: null
-        })
-    }
+    useEffect(() => {
+        /* usersData.map((item: usersDataType) => {
+             return item.id === idUserEdit && console.log(item)
+         })*/
 
-  /*  useEffect(() => {
-        reset({
-            id: null,
-            name: '',
-            age: null,
-            urlImg: null,
-            work: null
+        //reset({idUserEdit})
+
+        const user = usersData.find((item: usersDataType) => {
+            return item.id === idUserEdit
         })
-    }, [reset])*/
+        setEditUser(user)
+        reset(user)
+    }, [idUserEdit])
 
 
     return <div className={s.container} ref={editUserFormRef}>
         {usersData.map((item: usersDataType) => {
             return item.id === idUserEdit &&
-                <div key={item.id}>
+                <div key={item.id} className={s.editForm}>
                     <h3>Редактирование пользователя</h3>
                     <form onSubmit={handleSubmit(onSubmit)}>
 

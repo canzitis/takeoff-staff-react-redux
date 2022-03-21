@@ -55,11 +55,13 @@ const AddedUser: React.FC<AddedUserType> = ({modeAddedUser, setModeAddedUser}) =
     } = useForm();
 
     const onSubmit: any = (data: usersDataType) => {
+        console.log(data)
         dispatch(addedUser({
             id: null,
             name: data.name,
             age: Number(data.age),
-            urlImg: data.urlImg,
+            //TODO:убрал загрузку фото, т.к. json-server не умеет работать с загрузкой файлов.
+            urlImg: null,
             work: data.work
         }))
         reset({
@@ -105,6 +107,7 @@ const AddedUser: React.FC<AddedUserType> = ({modeAddedUser, setModeAddedUser}) =
                 <input
                     style={{border: errors.file && "solid 1px #E26F6F"}}
                     type="file"
+                    defaultValue={undefined}
                     {...register("urlImg")}
                 />
             </div>
