@@ -1,10 +1,11 @@
 import {useDispatch, useSelector} from "react-redux";
 import s from "./Users.module.scss";
 import {deleteUser, exitAccount, initialStateType, usersDataType} from "../../redux/app-reducer";
-import React from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Navigate} from "react-router-dom";
 import baseImg from '../../img/defaultImg/no_name_ava.png'
 import Search from "../SearchUsers/SearchUsers";
+import AddedUser from "../AddedUser/AddedUser";
 
 
 const Users = () => {
@@ -13,12 +14,13 @@ const Users = () => {
     const usersData = useSelector((state: initialStateType) => state.usersData);
     const dispatch = useDispatch();
 
+    const [addedUser, setAddedUser] = useState(false)
+
     const clickButtonExit = () => {
         dispatch(exitAccount());
     };
 
-    const clickDeleteUser =(id:number)=>{
-        debugger;
+    const clickDeleteUser = (id: number) => {
         dispatch(deleteUser(id))
     }
 
@@ -40,6 +42,14 @@ const Users = () => {
                     <Search/>
                 </div>
 
+                <div>
+                    <button onClick={() => {
+                        setAddedUser(true)
+                    }}>Добавить пользователя
+                    </button>
+                    <AddedUser addedUser={addedUser}/>
+                </div>
+
                 <div className={s.usersWrapper}>
                     {usersData.map((item: usersDataType) => {
                         return <div key={item.id} className={s.usersItem}>
@@ -50,7 +60,10 @@ const Users = () => {
                             </div>
                             <div className={s.buttonWrapper}>
                                 <button>Редактировать</button>
-                                <button onClick={()=>{clickDeleteUser(item.id)}}>Удалить</button>
+                                <button onClick={() => {
+                                    clickDeleteUser(item.id)
+                                }}>Удалить
+                                </button>
                             </div>
 
                         </div>
