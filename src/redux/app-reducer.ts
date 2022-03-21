@@ -16,7 +16,7 @@ export type usersDataType = {
     id: number,
     name: string,
     age: number,
-    urlImg: string,
+    urlImg: string | null,
     work: boolean
 }
 export type initialStateType = {
@@ -165,7 +165,6 @@ export const searchUser = (name: string) => {
 
 export const deleteUser = (id: number) => {
     return async (dispatch: any) => {
-        debugger
         const data = await api.deleteUser(id)
         if (data?.status === 200) {
             const data = await api.getUsers('')
@@ -176,4 +175,15 @@ export const deleteUser = (id: number) => {
     }
 }
 
+export const addedUser = (userData: usersDataType) => {
+    return async (dispatch: any) => {
+        const data = await api.addedUser(userData)
+        if (data?.status === 200) {
+            const data = await api.getUsers('')
+            if (data?.status === 200) {
+                dispatch(setUsers(data.data))
+            }
+        }
+    }
+}
 

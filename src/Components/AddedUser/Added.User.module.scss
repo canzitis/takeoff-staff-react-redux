@@ -1,11 +1,113 @@
 .container {
-    top:100px;
+    top: 100px;
     position: absolute;
     visibility: hidden;
-    width: 500px;
-    height: 600px;
+    width: 100%;
+    height: 550px;
     border-radius: 10px;
     box-shadow: 0 0 20px #838383;
     border: none;
     background: #F5F5F5;
+    transition: .5s;
+
+    h4{
+        font-size: 15px;
+        margin: 20px 0 15px 0;
+    }
+}
+
+.inputFormItems{
+    text-align: center;
+    input {
+        width: 50%;
+        height: 30px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        outline: none;
+        border: none;
+        padding-left: 10px;
+        box-sizing: border-box;
+        color: #232323;
+    }
+
+    span{
+        display: block;
+        color: red;
+    }
+}
+
+.inputFormItemsAge{
+    input {
+        width: 10%;
+        height: 30px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        outline: none;
+        border: none;
+        padding-left: 10px;
+        box-sizing: border-box;
+        color: #232323;
+    }
+
+    span{
+        display: block;
+        color: red;
+    }
+}
+
+.radioWrapper {
+    display: flex;
+    justify-content: center;
+
+    div {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.buttonWrapper{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+
+    input {
+        width: 150px;
+        height: 40px;
+        border-radius: 20px;
+        margin-top: 10px;
+        font-weight: bold;
+        border: unset;
+
+        &:first-child{
+            margin-right: 10px;
+            background: rgba(8, 255, 0, 0.49);
+        }
+
+        &:last-child{
+            background: rgba(255, 255, 0, 0.49);
+        }
+
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.05);
+            transition: transform .5s;
+        }
+    }
+}
+
+.buttonClose{
+    margin-top: 50px;
+    width: 150px;
+    height: 40px;
+    border-radius: 20px;
+    font-weight: bold;
+    border: unset;
+
+    background: rgba(255, 0, 0, 0.49);
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+        transition: transform .5s;
+    }
 }

@@ -1,20 +1,19 @@
 import {useDispatch, useSelector} from "react-redux";
 import s from "./Users.module.scss";
 import {deleteUser, exitAccount, initialStateType, usersDataType} from "../../redux/app-reducer";
-import React, {useEffect, useRef, useState} from "react";
+import React, {useState} from "react";
 import {Navigate} from "react-router-dom";
 import baseImg from '../../img/defaultImg/no_name_ava.png'
 import Search from "../SearchUsers/SearchUsers";
 import AddedUser from "../AddedUser/AddedUser";
 
-
 const Users = () => {
     const email = useSelector((state: initialStateType) => state.userForm.email);
     const verification = useSelector((state: initialStateType) => state.verification);
     const usersData = useSelector((state: initialStateType) => state.usersData);
-    const dispatch = useDispatch();
 
-    const [addedUser, setAddedUser] = useState(false)
+    const dispatch = useDispatch();
+    const [modeAddedUser, setModeAddedUser]= useState(false)
 
     const clickButtonExit = () => {
         dispatch(exitAccount());
@@ -42,13 +41,14 @@ const Users = () => {
                     <Search/>
                 </div>
 
-                <div>
+                <div className={s.addedUserButton}>
                     <button onClick={() => {
-                        setAddedUser(true)
+                        setModeAddedUser(true)
                     }}>Добавить пользователя
                     </button>
-                    <AddedUser addedUser={addedUser}/>
                 </div>
+
+                <AddedUser modeAddedUser={modeAddedUser} setModeAddedUser={setModeAddedUser}/>
 
                 <div className={s.usersWrapper}>
                     {usersData.map((item: usersDataType) => {
