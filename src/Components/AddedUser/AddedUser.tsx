@@ -1,8 +1,9 @@
 import React, {MutableRefObject, useEffect, useRef} from "react";
 import s from './Added.User.module.scss'
 import {useForm} from "react-hook-form";
-import {addedUser, usersDataType} from "../../redux/app-reducer";
-import {useDispatch} from "react-redux";
+import {addedUser, setCheckPublishUser, usersDataType} from "../../redux/app-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import checkPublishUserImg from '../../img/checkPublishUser.png'
 
 
 type AddedUserType = {
@@ -11,19 +12,11 @@ type AddedUserType = {
 }
 
 const AddedUser: React.FC<AddedUserType> = ({modeAddedUser, setModeAddedUser}) => {
-    const addedUserWindow = useRef() as MutableRefObject<HTMLDivElement>;
+    const checkPublishUser = useSelector((state: any) => state.checkPublishUser);
     const dispatch = useDispatch();
+    const addedUserWindow = useRef() as MutableRefObject<HTMLDivElement>;
+    const checkPublishUserBlock = useRef() as MutableRefObject<HTMLDivElement>;
 
-    const {
-        register,
-        handleSubmit,
-        formState: {errors},
-    } = useForm();
-
-    const onSubmit: any = (data: usersDataType) => {
-        console.log(data)
-        dispatch(addedUser(data))
-    };
 
     useEffect(() => {
         if (!addedUserWindow.current) return;
@@ -38,6 +31,46 @@ const AddedUser: React.FC<AddedUserType> = ({modeAddedUser, setModeAddedUser}) =
     }, [modeAddedUser])
 
 
+    useEffect(() => {
+        if (!checkPublishUserBlock.current) return;
+
+        if (checkPublishUser) {
+            checkPublishUserBlock.current.style.visibility = "visible"
+            checkPublishUserBlock.current.style.opacity = "1"
+            setTimeout(() => {
+                dispatch(setCheckPublishUser(false))
+            }, 3000)
+        } else {
+            checkPublishUserBlock.current.style.visibility = "hidden"
+            checkPublishUserBlock.current.style.opacity = "0"
+        }
+    }, [checkPublishUser])
+
+
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: {errors},
+    } = useForm();
+
+    const onSubmit: any = (data: usersDataType) => {
+        dispatch(addedUser({
+            id: null,
+            name: data.name,
+            age: Number(data.age),
+            urlImg: data.urlImg,
+            work: data.work
+        }))
+        reset({
+            id: null,
+            name: '',
+            age: null,
+            urlImg: null,
+            work: null
+        })
+    };
+
     return <div ref={addedUserWindow} className={s.container}>
         <h3>Добавить пользователя</h3>
         <form onSubmit={handleSubmit(onSubmit)} className={s.wrapperInputFormItems}>
@@ -47,6 +80,8 @@ const AddedUser: React.FC<AddedUserType> = ({modeAddedUser, setModeAddedUser}) =
                     style={{border: errors.name && "solid 1px #E26F6F"}}
                     type="text"
                     {...register("name", {required: true})}
+                    minLength={2}
+                    maxLength={30}
                 />
                 {errors.name && <span className={s.errorText}>Обязательное поле</span>}
             </div>
@@ -70,13 +105,13 @@ const AddedUser: React.FC<AddedUserType> = ({modeAddedUser, setModeAddedUser}) =
                 <input
                     style={{border: errors.file && "solid 1px #E26F6F"}}
                     type="file"
-                    {...register("urlImg", {required: true})}
+                    {...register("urlImg")}
                 />
             </div>
 
 
             <div className={s.inputFormItems__radio}>
-                <h4>Работаете?</h4>
+                <h4>В поиске работы?</h4>
                 <div className={s.radioWrapper}>
                     <input type="checkbox"  {...register("work")} />
                     <span>Да</span>
@@ -95,6 +130,12 @@ const AddedUser: React.FC<AddedUserType> = ({modeAddedUser, setModeAddedUser}) =
                 />
             </div>
         </form>
+
+        <div ref={checkPublishUserBlock} className={s.checkPublishUser}>
+            <img src={checkPublishUserImg} alt="checkPublishUser"/>
+            <span>Пользователь добавлен!</span>
+        </div>
+
         <button className={s.buttonClose} onClick={() => {
             setModeAddedUser(false)
         }}>Закрыть окно

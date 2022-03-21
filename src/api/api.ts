@@ -16,7 +16,7 @@ export const api = {
             })
     },
 
-    deleteUser(id: number) {
+    deleteUser(id: number | null) {
         return axios.delete(`${instanceAPI.baseUrl}/${id}`)
             .then(response => {
                 return response
@@ -27,7 +27,6 @@ export const api = {
     },
 
     addedUser(userData: usersDataType) {
-        debugger
         return axios.post(`${instanceAPI.baseUrl}`, {
             name: userData.name,
             age: Number(userData.age),

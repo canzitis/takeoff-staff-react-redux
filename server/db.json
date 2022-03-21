@@ -1,46 +1,46 @@
 {
-    "users": [
-        {
-            "id": 0,
-            "name": "Иван Грозный",
-            "age": 35,
-            "urlImg": "/image/user.png",
-            "work": true
-        },
-        {
-            "id": 1,
-            "name": "Алексей Петров",
-            "age": 19,
-            "urlImg": "/image/user.png",
-            "work": false
-        },
-        {
-            "id": 2,
-            "name": "Максим Запашный",
-            "age": 25,
-            "urlImg": null,
-            "work": true
-        },
-        {
-            "id": 3,
-            "name": "Саша Запашный",
-            "age": 21,
-            "urlImg": "/image/user.png",
-            "work": true
-        },
-        {
-            "id": 4,
-            "name": "Антон Власов",
-            "age": 36,
-            "urlImg": null,
-            "work": false
-        },
-        {
-            "id": 5,
-            "name": "Владимир Терешков",
-            "age": 31,
-            "urlImg": "/image/user.png",
-            "work": false
-        }
-    ]
+  "users": [
+    {
+      "id": 0,
+      "name": "Иван Грозный",
+      "age": 35,
+      "urlImg": "/image/user.png",
+      "work": true
+    },
+    {
+      "id": 1,
+      "name": "Алексей Петров",
+      "age": 19,
+      "urlImg": "/image/user.png",
+      "work": false
+    },
+    {
+      "id": 2,
+      "name": "Максим Запашный",
+      "age": 25,
+      "urlImg": null,
+      "work": true
+    },
+    {
+      "id": 3,
+      "name": "Саша Запашный",
+      "age": 21,
+      "urlImg": "/image/user.png",
+      "work": true
+    },
+    {
+      "id": 4,
+      "name": "Антон Власов",
+      "age": 36,
+      "urlImg": null,
+      "work": false
+    },
+    {
+      "id": 5,
+      "name": "Владимир Терешков",
+      "age": 31,
+      "urlImg": "/image/user.png",
+      "work": false
+    }
+  ]
 }

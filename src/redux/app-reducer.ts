@@ -6,6 +6,7 @@ const SET_USER_FORM = "SET_USER_FORM"
 const USER_VERIFICATION = "USER_VERIFICATION"
 const EXIT_ACCOUNT = "EXIT_ACCOUNT"
 const SET_USERS = "SET_USERS"
+const CHECK_PUBLISH_USER = "CHECK_PUBLISH_USER"
 
 
 export type userFormType = {
@@ -13,22 +14,25 @@ export type userFormType = {
     password: string | null
 }
 export type usersDataType = {
-    id: number,
+    id: number | null,
     name: string,
     age: number,
     urlImg: string | null,
-    work: boolean
+    work: boolean,
+
 }
+
+
 export type initialStateType = {
     userForm: any,
     initialize: boolean,
     disabledButton: boolean,
     verification: boolean
     usersData: any
+    checkPublishUser: boolean,
+    editUserForm: boolean
 }
-
-
-let initialState = {
+let initialState: initialStateType = {
     userForm: {
         email: null,
         password: null,
@@ -37,6 +41,8 @@ let initialState = {
     disabledButton: false,
     verification: false,
     usersData: [],
+    checkPublishUser: false,
+    editUserForm: false
 }
 
 
@@ -73,8 +79,13 @@ const appReducer = (state = initialState, action: any): initialStateType => {
         case SET_USERS:
             return {
                 ...state,
-                usersData: [...action.users],
+                usersData: [...action.users.reverse()],
                 verification: true
+            }
+        case CHECK_PUBLISH_USER:
+            return {
+                ...state,
+                checkPublishUser: action.checkPublishUser
             }
         default:
             return state;
@@ -138,6 +149,18 @@ const setUsers = (users: usersDataType): setUsersType => {
 }
 
 
+type setCheckPublishUserType = {
+    type: typeof CHECK_PUBLISH_USER,
+    checkPublishUser: boolean
+}
+export const setCheckPublishUser = (checkPublishUser: boolean): setCheckPublishUserType => {
+    return {
+        type: CHECK_PUBLISH_USER,
+        checkPublishUser
+    }
+}
+
+
 export const initializeProfile = () => {
     return async (dispatch: any) => {
         dispatch(initializetSuccess(false));
@@ -163,7 +186,7 @@ export const searchUser = (name: string) => {
 }
 
 
-export const deleteUser = (id: number) => {
+export const deleteUser = (id: number | null) => {
     return async (dispatch: any) => {
         const data = await api.deleteUser(id)
         if (data?.status === 200) {
@@ -177,12 +200,11 @@ export const deleteUser = (id: number) => {
 
 export const addedUser = (userData: usersDataType) => {
     return async (dispatch: any) => {
-        const data = await api.addedUser(userData)
+        await api.addedUser(userData)
+        const data = await api.getUsers('')
         if (data?.status === 200) {
-            const data = await api.getUsers('')
-            if (data?.status === 200) {
-                dispatch(setUsers(data.data))
-            }
+            dispatch(setUsers(data.data))
+            dispatch(setCheckPublishUser(true))
         }
     }
 }

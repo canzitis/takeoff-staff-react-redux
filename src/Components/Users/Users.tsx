@@ -6,6 +6,7 @@ import {Navigate} from "react-router-dom";
 import baseImg from '../../img/defaultImg/no_name_ava.png'
 import Search from "../SearchUsers/SearchUsers";
 import AddedUser from "../AddedUser/AddedUser";
+import EditUserForm from "../EditUser/EditUserForm";
 
 const Users = () => {
     const email = useSelector((state: initialStateType) => state.userForm.email);
@@ -13,13 +14,15 @@ const Users = () => {
     const usersData = useSelector((state: initialStateType) => state.usersData);
 
     const dispatch = useDispatch();
-    const [modeAddedUser, setModeAddedUser]= useState(false)
+    const [modeAddedUser, setModeAddedUser] = useState(false)
+    const [editUserForm, setEditUserForm] = useState(false)
+    const [idUserEdit, setIdUserEdit] = useState<any | null>(null)
 
     const clickButtonExit = () => {
         dispatch(exitAccount());
     };
 
-    const clickDeleteUser = (id: number) => {
+    const clickDeleteUser = (id: number | null) => {
         dispatch(deleteUser(id))
     }
 
@@ -59,16 +62,21 @@ const Users = () => {
                             <div className={s.usersItem__work}>В поиске работы: <span>{item.work ? "Да" : "Нет"}</span>
                             </div>
                             <div className={s.buttonWrapper}>
-                                <button>Редактировать</button>
+                                <button onClick={() => {
+                                    setIdUserEdit(item.id)
+                                    setEditUserForm(true)
+                                }}>Редактировать
+                                </button>
                                 <button onClick={() => {
                                     clickDeleteUser(item.id)
                                 }}>Удалить
                                 </button>
                             </div>
-
                         </div>
                     })}
                 </div>
+
+                <EditUserForm editUserForm={editUserForm} setEditUserForm={setEditUserForm} idUserEdit={idUserEdit}/>
 
                 <div className={s.exitAccountButton}>
                     <button
