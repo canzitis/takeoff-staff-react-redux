@@ -2,7 +2,6 @@
     text-align: center;
 }
 
-
 .App-header {
     background-color: #282c34;
     min-height: 100vh;
@@ -28,27 +27,21 @@
 }
 
 .container {
-    /*position: relative;*/
-    max-width:600px;
+    max-width: 900px;
+    padding: 0 50px 0 50px;
     margin: 0 auto;
     text-align: center;
 }
 
-@media (max-width: 1600px) {
+
+@media (max-width: 500px) {
     .container {
-        max-width: 500px;
+        padding: 0 20px 0 20px;
     }
 }
 
 
-@media (max-width: 768px) {
-    .container {
-        max-width: 370px;
-    }
+@media (max-width: 1440px) {
+
 }
 
-@media (max-width: 400px) {
-    .container {
-        max-width: 300px;
-    }
-}

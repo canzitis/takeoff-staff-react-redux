@@ -7,14 +7,20 @@
 
 .inputSearch {
     input {
-        width: 400px;
+        width: 300px;
         height: 25px;
         border-radius: 5px;
         padding-left: 10px;
         border: unset;
         background: #e2e2e2;
         outline: unset;
+        margin-right: 10px;
     }
+}
+
+.buttonWrapper{
+    display: flex;
+    align-items: center;
 }
 
 .errorText {
@@ -59,7 +65,6 @@
 
 
 .buttonSend {
-    position: absolute;
     right: 60px;
     width: 24px;
     height: 24px;
@@ -94,3 +99,13 @@
     }
 }
 
+
+@media (max-width:500px) {
+
+    .inputSearch {
+        input {
+            width: 200px;
+        }
+    }
+
+}

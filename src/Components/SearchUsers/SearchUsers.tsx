@@ -37,27 +37,25 @@ const Search = () => {
                         {...register("search",
                             {
                                 required: true,
-                                minLength: {
-                                    value: 3,
-                                    message: 'Минимум 3 символа'
-                                }
                             })}
                     />
                 </div>
-                <input
-                    className={s.buttonSend}
-                    type="submit"
-                    disabled={disabledButton}
-                    value=""
-                />
-                <input
-                    className={s.buttonSearchReset}
-                    type="reset"
-                    value=""
-                    onClick={() => {
-                        resetSearch()
-                    }}
-                />
+                <div className={s.buttonWrapper}>
+                    <input
+                        className={s.buttonSend}
+                        type="submit"
+                        disabled={disabledButton}
+                        value=""
+                    />
+                    <input
+                        className={s.buttonSearchReset}
+                        type="reset"
+                        value=""
+                        onClick={() => {
+                            resetSearch()
+                        }}
+                    />
+                </div>
             </div>
             {errors?.search &&
                 <div className={s.errorText}><img src={dangerSrc} alt=""/><span>Поле обязательно к заполнению!</span>

@@ -139,3 +139,26 @@
         transition: transform .5s;
     }
 }
+
+
+@media (max-width: 800px) {
+    .editForm{
+        max-width: 450px;
+    }
+}
+
+@media (max-width: 600px) {
+    .editForm{
+        max-width: 300px;
+    }
+
+    .wrapperEditFormItemsFlex{
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 500px) {
+    .editForm{
+        max-width: 250px;
+    }
+}
