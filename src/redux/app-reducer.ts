@@ -209,3 +209,14 @@ export const addedUser = (userData: usersDataType) => {
     }
 }
 
+export const editUser = (editUser: usersDataType) => {
+    return async (dispatch: any) => {
+        await api.editUser(editUser)
+        const data = await api.getUsers('')
+        if (data?.status === 200) {
+            dispatch(setUsers(data.data))
+            dispatch(setCheckPublishUser(true))
+        }
+    }
+}
+

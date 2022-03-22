@@ -104,12 +104,14 @@ const AddedUser: React.FC<AddedUserType> = ({modeAddedUser, setModeAddedUser}) =
 
             <div className={s.inputFormItems__file}>
                 <h4>Ваше фото:</h4>
-                <input
+                {/*TODO:убрал загрузку фото, т.к. json-server не умеет работать с загрузкой файлов.}*/}
+                {/*<input
                     style={{border: errors.file && "solid 1px #E26F6F"}}
                     type="file"
                     defaultValue={undefined}
                     {...register("urlImg")}
-                />
+                />*/}
+                <span>Тут должна быть загрузка фото</span>
             </div>
 
 

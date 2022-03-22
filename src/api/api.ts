@@ -29,6 +29,21 @@ export const api = {
     addedUser(userData: usersDataType) {
         return axios.post(`${instanceAPI.baseUrl}`, {
             name: userData.name,
+            age: userData.age,
+            urlImg: userData.urlImg,
+            work: userData.work
+        })
+            .then(response => {
+                return response
+            })
+            .catch(error => {
+                return console.log(error);
+            })
+    },
+
+    editUser(userData: usersDataType) {
+        return axios.put(`${instanceAPI.baseUrl}/${userData.id}`, {
+            name: userData.name,
             age: Number(userData.age),
             urlImg: userData.urlImg,
             work: userData.work

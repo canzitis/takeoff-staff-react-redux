@@ -36,11 +36,18 @@
       "work": false
     },
     {
-      "id": 5,
-      "name": "Владимир Терешков",
-      "age": 31,
+      "name": "Владимир ТерешковЧик",
+      "age": 30,
       "urlImg": "/image/user.png",
-      "work": false
+      "work": true,
+      "id": 5
+    },
+    {
+      "name": "Елена Пока",
+      "age": 27,
+      "urlImg": null,
+      "work": true,
+      "id": 6
     }
   ]
 }
