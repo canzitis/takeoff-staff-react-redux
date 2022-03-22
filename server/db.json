@@ -34,6 +34,13 @@
       "urlImg": null,
       "work": true,
       "id": 4
+    },
+    {
+      "name": "Анастасия Трепыш",
+      "age": 24,
+      "urlImg": null,
+      "work": true,
+      "id": 5
     }
   ]
 }

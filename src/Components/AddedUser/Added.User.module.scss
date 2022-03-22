@@ -49,7 +49,7 @@
 
 .inputFormItemsAge {
     input {
-        width: 10%;
+        width: 30%;
         height: 30px;
         background-color: #ffffff;
         border-radius: 8px;
@@ -58,6 +58,8 @@
         padding-left: 10px;
         box-sizing: border-box;
         color: #232323;
+        text-align: center;
+        font-weight: bold;
     }
 
     span {
