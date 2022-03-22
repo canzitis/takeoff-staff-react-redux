@@ -1,18 +1,24 @@
 import React, {MutableRefObject, useEffect, useRef} from "react";
 import s from './Added.User.module.scss'
 import {useForm} from "react-hook-form";
-import {addedUser, setCheckPublishUser, usersDataType} from "../../redux/app-reducer";
+import {addedUser, initialStateType, setCheckPublishUser} from "../../redux/app-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import checkPublishUserImg from '../../img/checkPublishUser.png'
 
 
 type AddedUserType = {
     modeAddedUser: boolean
-    setModeAddedUser: any
+    setModeAddedUser: (a: boolean) => void
 }
-
+export type dataType = {
+    id: number | null
+    name: string | null
+    age: number | null
+    urlImg: null,
+    work: boolean | null
+}
 const AddedUser: React.FC<AddedUserType> = ({modeAddedUser, setModeAddedUser}) => {
-    const checkPublishUser = useSelector((state: any) => state.checkPublishUser);
+    const checkPublishUser = useSelector((state: initialStateType) => state.checkPublishUser);
     const dispatch = useDispatch();
     const addedUserWindow = useRef() as MutableRefObject<HTMLDivElement>;
     const checkPublishUserBlock = useRef() as MutableRefObject<HTMLDivElement>;
@@ -39,7 +45,7 @@ const AddedUser: React.FC<AddedUserType> = ({modeAddedUser, setModeAddedUser}) =
             checkPublishUserBlock.current.style.opacity = "1"
             setTimeout(() => {
                 dispatch(setCheckPublishUser(false))
-            }, 3000)
+            }, 1500)
         } else {
             checkPublishUserBlock.current.style.visibility = "hidden"
             checkPublishUserBlock.current.style.opacity = "0"
@@ -52,10 +58,9 @@ const AddedUser: React.FC<AddedUserType> = ({modeAddedUser, setModeAddedUser}) =
         handleSubmit,
         reset,
         formState: {errors},
-    } = useForm();
+    } = useForm<dataType>();
 
-    const onSubmit: any = (data: usersDataType) => {
-        console.log(data)
+    const onSubmit = (data: dataType) => {
         dispatch(addedUser({
             id: null,
             name: data.name,
@@ -71,6 +76,9 @@ const AddedUser: React.FC<AddedUserType> = ({modeAddedUser, setModeAddedUser}) =
             urlImg: null,
             work: null
         })
+        setTimeout(() => {
+            setModeAddedUser(false)
+        }, 2000)
     };
 
     return <div ref={addedUserWindow} className={s.container}>
@@ -126,11 +134,9 @@ const AddedUser: React.FC<AddedUserType> = ({modeAddedUser, setModeAddedUser}) =
 
             <div className={s.buttonWrapper}>
                 <input
-                    className={s.buttonSend}
                     type="submit"
                 />
                 <input
-                    className={s.buttonReset}
                     type="reset"
                 />
             </div>

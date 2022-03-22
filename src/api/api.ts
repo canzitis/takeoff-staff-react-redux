@@ -1,5 +1,5 @@
 import axios from "axios";
-import {usersDataType} from "../redux/app-reducer";
+import {addedUserType, editUserType} from "../redux/app-reducer";
 
 const instanceAPI = {
     baseUrl: "http://localhost:3001/users",
@@ -26,7 +26,7 @@ export const api = {
             })
     },
 
-    addedUser(userData: usersDataType) {
+    addedUser(userData: addedUserType) {
         return axios.post(`${instanceAPI.baseUrl}`, {
             name: userData.name,
             age: userData.age,
@@ -41,7 +41,7 @@ export const api = {
             })
     },
 
-    editUser(userData: usersDataType) {
+    editUser(userData: editUserType) {
         return axios.put(`${instanceAPI.baseUrl}/${userData.id}`, {
             name: userData.name,
             age: Number(userData.age),

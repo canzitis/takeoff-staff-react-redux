@@ -1,9 +1,9 @@
 import {api} from "../api/api";
+import {Dispatch} from "react";
 
 const SET_INITIALIZET = "SET_INITIALIZET"
 const SET_DISABLE_BUTTON_LOGIN = "SET_DISABLE_BUTTON_LOGIN"
 const SET_USER_FORM = "SET_USER_FORM"
-const USER_VERIFICATION = "USER_VERIFICATION"
 const EXIT_ACCOUNT = "EXIT_ACCOUNT"
 const SET_USERS = "SET_USERS"
 const CHECK_PUBLISH_USER = "CHECK_PUBLISH_USER"
@@ -13,24 +13,23 @@ export type userFormType = {
     email: string | null
     password: string | null
 }
+
 export type usersDataType = {
     id: number | null,
     name: string,
     age: number,
     urlImg: string | null,
     work: boolean,
-
-}
+}[]
 
 
 export type initialStateType = {
-    userForm: any,
+    userForm: userFormType,
     initialize: boolean,
     disabledButton: boolean,
     verification: boolean
-    usersData: any
+    usersData: [] | usersDataType
     checkPublishUser: boolean,
-    editUserForm: boolean
 }
 let initialState: initialStateType = {
     userForm: {
@@ -42,11 +41,18 @@ let initialState: initialStateType = {
     verification: false,
     usersData: [],
     checkPublishUser: false,
-    editUserForm: false
 }
 
 
-const appReducer = (state = initialState, action: any): initialStateType => {
+type ActionsTypes =
+    setDisabledButtonLoginType
+    | initializetSuccessType
+    | setUserFormType
+    | exitAccountType
+    | setUsersType
+    | setCheckPublishUserType
+
+const appReducer = (state = initialState, action: ActionsTypes): initialStateType => {
     switch (action.type) {
         case SET_INITIALIZET:
             return {
@@ -63,11 +69,6 @@ const appReducer = (state = initialState, action: any): initialStateType => {
                 ...state,
                 verification: false
             }
-        case USER_VERIFICATION:
-            return {
-                ...state,
-                verification: action.verification
-            }
         case SET_USER_FORM:
             return {
                 ...state,
@@ -79,7 +80,7 @@ const appReducer = (state = initialState, action: any): initialStateType => {
         case SET_USERS:
             return {
                 ...state,
-                usersData: [...action.users.reverse()],
+                usersData: [...action.usersData.reverse()],
                 verification: true
             }
         case CHECK_PUBLISH_USER:
@@ -139,12 +140,12 @@ export const exitAccount = (): exitAccountType => {
 
 type setUsersType = {
     type: typeof SET_USERS
-    users: usersDataType
+    usersData: usersDataType
 }
-const setUsers = (users: usersDataType): setUsersType => {
+const setUsers = (usersData: usersDataType): setUsersType => {
     return {
         type: SET_USERS,
-        users
+        usersData
     }
 }
 
@@ -162,7 +163,7 @@ export const setCheckPublishUser = (checkPublishUser: boolean): setCheckPublishU
 
 
 export const initializeProfile = () => {
-    return async (dispatch: any) => {
+    return async (dispatch: Dispatch<ActionsTypes>) => {
         dispatch(initializetSuccess(false));
         dispatch(setDisabledButtonLogin(true))
         const data = await api.getUsers('')
@@ -175,7 +176,7 @@ export const initializeProfile = () => {
 }
 
 export const searchUser = (name: string) => {
-    return async (dispatch: any) => {
+    return async (dispatch: Dispatch<ActionsTypes>) => {
         dispatch(setDisabledButtonLogin(true))
         const data = await api.getUsers(name)
         if (data?.status === 200) {
@@ -187,7 +188,7 @@ export const searchUser = (name: string) => {
 
 
 export const deleteUser = (id: number | null) => {
-    return async (dispatch: any) => {
+    return async (dispatch: Dispatch<ActionsTypes>) => {
         const data = await api.deleteUser(id)
         if (data?.status === 200) {
             const data = await api.getUsers('')
@@ -198,8 +199,16 @@ export const deleteUser = (id: number | null) => {
     }
 }
 
-export const addedUser = (userData: usersDataType) => {
-    return async (dispatch: any) => {
+
+export type addedUserType = {
+    id: number | null
+    name: string | null
+    age: number | null
+    urlImg: null,
+    work: boolean | null
+}
+export const addedUser = (userData: addedUserType) => {
+    return async (dispatch: Dispatch<ActionsTypes>) => {
         await api.addedUser(userData)
         const data = await api.getUsers('')
         if (data?.status === 200) {
@@ -209,8 +218,16 @@ export const addedUser = (userData: usersDataType) => {
     }
 }
 
-export const editUser = (editUser: usersDataType) => {
-    return async (dispatch: any) => {
+
+export type editUserType = {
+    id: number | null,
+    name: string,
+    age: number,
+    urlImg: string | null,
+    work: boolean,
+}
+export const editUser = (editUser: editUserType) => {
+    return async (dispatch: Dispatch<ActionsTypes>) => {
         await api.editUser(editUser)
         const data = await api.getUsers('')
         if (data?.status === 200) {

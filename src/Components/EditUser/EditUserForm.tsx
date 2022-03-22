@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {editUser, initialStateType, usersDataType} from "../../redux/app-reducer";
+import {editUser, initialStateType} from "../../redux/app-reducer";
 import React, {MutableRefObject, useEffect, useRef, useState} from "react";
 import s from "./EditUserForm.module.scss";
 import {useForm} from "react-hook-form";
@@ -7,15 +7,23 @@ import baseImg from '../../img/defaultImg/no_name_ava.png'
 import checkEditUserImg from '../../img/checkPublishUser.png'
 
 type setEditUserFormType = {
-    setEditUserForm: any,
+    setEditUserForm: (a:boolean) => void,
     editUserForm: boolean,
     idUserEdit: number | null
+}
+
+
+type dataType = {
+    id: number | null,
+    name: string,
+    age: number,
+    urlImg: string | null,
+    work: boolean,
 }
 
 const EditUserForm: React.FC<setEditUserFormType> = ({setEditUserForm, editUserForm, idUserEdit}) => {
     const usersData = useSelector((state: initialStateType) => state.usersData);
     const editUserFormRef = useRef() as MutableRefObject<HTMLDivElement>;
-    const [editUserState, setEditUserState] = useState(null);
     const [checkEditUser, setCheckEditUser] = useState(false);
     const checkEditUserRef = useRef() as MutableRefObject<HTMLDivElement>;
     const dispatch = useDispatch();
@@ -51,20 +59,20 @@ const EditUserForm: React.FC<setEditUserFormType> = ({setEditUserForm, editUserF
         handleSubmit,
         reset,
         formState: {errors},
-    } = useForm();
+    } = useForm<dataType>();
 
-    const onSubmit: any = (data: usersDataType) => {
-        dispatch(editUser(data))
+    const onSubmit = (dataEditUser: dataType) => {
+        dispatch(editUser(dataEditUser))
         setCheckEditUser(true)
         setTimeout(() => {
             setEditUserForm(false)
             setCheckEditUser(false)
-        }, 2000)
+        }, 1500)
     };
 
 
     useEffect(() => {
-        const editUserState = usersData.find((item: usersDataType) => {
+        const editUserState = usersData.find((item: dataType) => {
             return item.id === idUserEdit
         })
         reset(editUserState)
@@ -72,7 +80,7 @@ const EditUserForm: React.FC<setEditUserFormType> = ({setEditUserForm, editUserF
 
 
     return <div className={s.container} ref={editUserFormRef}>
-        {usersData.map((item: usersDataType) => {
+        {usersData.map((item: dataType) => {
             return item.id === idUserEdit &&
                 <div key={item.id} className={s.editForm}>
                     <h3>Редактирование пользователя</h3>

@@ -3,19 +3,22 @@ import {useForm} from "react-hook-form";
 import {useDispatch, useSelector} from "react-redux";
 import s from "./SearchUsers.module.scss";
 import dangerSrc from '../../img/danger.png'
-import {searchUser} from "../../redux/app-reducer";
+import {initialStateType, searchUser} from "../../redux/app-reducer";
 
+type dataType = {
+    search: string
+}
 const Search = () => {
-    const disabledButton = useSelector((state: any) => state.disabledButton);
+    const disabledButton = useSelector((state: initialStateType) => state.disabledButton);
     const dispatch = useDispatch();
 
     const {
         register,
         handleSubmit,
         formState: {errors},
-    } = useForm();
+    } = useForm<dataType>();
 
-    const onSubmit = (name: any) => {
+    const onSubmit = (name: dataType) => {
         dispatch(searchUser(name.search))
     };
 
@@ -51,7 +54,9 @@ const Search = () => {
                     className={s.buttonSearchReset}
                     type="reset"
                     value=""
-                    onClick={()=>{resetSearch()}}
+                    onClick={() => {
+                        resetSearch()
+                    }}
                 />
             </div>
             {errors?.search &&

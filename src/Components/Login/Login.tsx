@@ -8,7 +8,7 @@ import {Navigate} from "react-router-dom";
 
 const Login = () => {
     const dispatch = useDispatch();
-    const initialize = useSelector((state: any) => state.initialize);
+    const initialize = useSelector((state: initialStateType) => state.initialize);
     const verification = useSelector((state: initialStateType) => state.verification);
 
     useEffect(() => {

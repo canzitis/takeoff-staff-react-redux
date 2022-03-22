@@ -29,25 +29,11 @@
       "work": true
     },
     {
-      "id": 4,
-      "name": "Антон Власов",
-      "age": 36,
-      "urlImg": null,
-      "work": false
-    },
-    {
-      "name": "Владимир ТерешковЧик",
-      "age": 30,
-      "urlImg": "/image/user.png",
-      "work": true,
-      "id": 5
-    },
-    {
-      "name": "Елена Пока",
-      "age": 27,
+      "name": "Михаил Парикин",
+      "age": 32,
       "urlImg": null,
       "work": true,
-      "id": 6
+      "id": 4
     }
   ]
 }

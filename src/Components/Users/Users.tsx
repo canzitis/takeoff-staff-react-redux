@@ -1,12 +1,22 @@
 import {useDispatch, useSelector} from "react-redux";
 import s from "./Users.module.scss";
-import {deleteUser, exitAccount, initialStateType, usersDataType} from "../../redux/app-reducer";
+import {deleteUser, exitAccount, initialStateType} from "../../redux/app-reducer";
 import React, {useState} from "react";
 import {Navigate} from "react-router-dom";
 import baseImg from '../../img/defaultImg/no_name_ava.png'
 import Search from "../SearchUsers/SearchUsers";
 import AddedUser from "../AddedUser/AddedUser";
 import EditUserForm from "../EditUser/EditUserForm";
+
+
+type dataType = {
+    id: number | null,
+    name: string,
+    age: number,
+    urlImg: string | null,
+    work: boolean,
+}
+
 
 const Users = () => {
     const email = useSelector((state: initialStateType) => state.userForm.email);
@@ -16,7 +26,7 @@ const Users = () => {
     const dispatch = useDispatch();
     const [modeAddedUser, setModeAddedUser] = useState(false)
     const [editUserForm, setEditUserForm] = useState(false)
-    const [idUserEdit, setIdUserEdit] = useState<any | null>(null)
+    const [idUserEdit, setIdUserEdit] = useState<number | null>(null)
 
     const clickButtonExit = () => {
         dispatch(exitAccount());
@@ -54,7 +64,7 @@ const Users = () => {
                 <AddedUser modeAddedUser={modeAddedUser} setModeAddedUser={setModeAddedUser}/>
 
                 <div className={s.usersWrapper}>
-                    {usersData.map((item: usersDataType) => {
+                    {usersData.map((item: dataType) => {
                         return <div key={item.id} className={s.usersItem}>
                             <img src={item.urlImg ? item.urlImg : baseImg} alt=""/>
                             <h4>{item.name}</h4>

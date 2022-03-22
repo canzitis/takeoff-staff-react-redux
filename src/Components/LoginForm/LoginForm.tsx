@@ -2,22 +2,28 @@ import React from "react";
 import {useForm} from "react-hook-form";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    initializeProfile,
+    initializeProfile, initialStateType,
     setUserForm, userFormType
 } from "../../redux/app-reducer";
 import s from "./LoginForm.module.scss";
 
+type dataType = {
+    email: string,
+    password: string,
+    checkbox: boolean
+}
+
 const LoginForm = () => {
-    const disabledButton = useSelector((state: any) => state.disabledButton);
+    const disabledButton = useSelector((state: initialStateType) => state.disabledButton);
 
     const dispatch = useDispatch();
     const {
         register,
         handleSubmit,
         formState: {errors},
-    } = useForm();
+    } = useForm<dataType>();
 
-    const onSubmit: any = (data: userFormType) => {
+    const onSubmit = (data: userFormType) => {
         dispatch(setUserForm(data));
         dispatch(initializeProfile());
     };
